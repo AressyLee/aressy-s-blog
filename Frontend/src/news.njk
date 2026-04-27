@@ -1,0 +1,77 @@
+---
+layout: layouts/page.njk
+title: 最新消息
+permalink: /archive/latest/
+---
+
+{# =========================================================
+   SECTION 1 — HERO
+   ========================================================= #}
+<section class="news-hero" style="background-image: url('{{ newsData.hero.hero_bg_url }}')">
+  <div class="news-hero-overlay"></div>
+  <div class="news-hero-content">
+    <p class="caption news-hero-label">最新消息 / Latest News</p>
+    <h1 class="news-hero-title">{{ newsData.hero.hero_title }}</h1>
+    <div class="news-hero-meta">
+      <span class="news-hero-date">📅 {{ newsData.hero.hero_date }}</span>
+      <span class="news-hero-location">📍 {{ newsData.hero.hero_location }}</span>
+    </div>
+    <p class="news-hero-summary">{{ newsData.hero.hero_summary }}</p>
+  </div>
+</section>
+
+{# =========================================================
+   SECTION 2 — NEWS LIST
+   ========================================================= #}
+<section class="news-list-section">
+  <div class="news-list-header">
+    <h2 class="news-list-title">所有消息</h2>
+    <div class="news-filter-pills">
+      <button class="news-pill active" data-filter="all">全部</button>
+      {% for cat in newsData.categories %}
+      <button class="news-pill" data-filter="{{ cat }}">{{ cat }}</button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <ul class="news-feed" id="news-feed">
+    {% for item in newsData.items %}
+    <li class="news-item" data-category="{{ item.category }}">
+      <a href="{{ item.link or '#' }}" class="news-item-link">
+        <div class="news-item-thumb" style="background-image: url('{{ item.image_url }}')"></div>
+        <div class="news-item-body">
+          <div class="news-item-meta">
+            <span class="news-item-category">{{ item.category }}</span>
+            <span class="news-item-date">{{ item.date }}</span>
+          </div>
+          <h3 class="news-item-title">{{ item.title }}</h3>
+          <p class="news-item-summary">{{ item.summary }}</p>
+        </div>
+        <div class="news-item-arrow">→</div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<script>
+  // 分類過濾邏輯
+  const pills = document.querySelectorAll('.news-pill');
+  const feedItems = document.querySelectorAll('.news-item');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filter = pill.dataset.filter;
+      feedItems.forEach(item => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

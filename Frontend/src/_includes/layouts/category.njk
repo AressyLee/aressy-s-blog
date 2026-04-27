@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+---
+<section class="category-wrapper">
+  <header class="category-header">
+    <h1 class="display-text">{{ title }}</h1>
+    <p class="caption" style="margin-top: var(--spacing-sm);">{{ description }}</p>
+  </header>
+
+  <div class="article-grid">
+    {{ content | safe }}
+    {% set catlist = collections[title] %}
+    {% if catlist and catlist.length > 0 %}
+      {% for post in catlist | reverse %}
+      <article class="article-card">
+        <div class="card-image" style="background-image: url('{{ post.data.cover_image or '/assets/placeholder.jpg' }}');"></div>
+        <div class="card-content">
+          <div class="card-meta"><span class="card-category">{{ post.data.tags[0] }}</span><span class="card-date">{{ post.date | dateFilter }}</span></div>
+          <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+          <p class="card-summary">{{ post.data.summary }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    {% else %}
+      <p>目前尚無文章。</p>
+    {% endif %}
+  </div>
+</section>

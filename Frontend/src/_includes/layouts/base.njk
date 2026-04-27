@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ summary or site.description }}">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    {% include "components/nav.njk" %}
+
+    <main class="site-main">
+      {{ content | safe }}
+    </main>
+
+    {% include "components/footer.njk" %}
+  </div>
+  <script src="/assets/js/carousel.js" defer></script>
+</body>
+</html>

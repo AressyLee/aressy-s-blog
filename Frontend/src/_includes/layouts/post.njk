@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+---
+<article class="post-layout">
+  <nav class="caption" style="margin-bottom: var(--spacing-lg);">
+    <a href="/">首頁</a> &mdash; <a href="/archive/{{ tags[0] }}/">{{ tags[0] }}</a> &mdash; 閱讀
+  </nav>
+
+  <header class="post-header">
+    <h1>{{ title }}</h1>
+    <div class="post-meta">
+      <span class="date">DATE: {{ date | dateFilter }}</span>
+      <span class="author">BY: {{ author }}</span>
+    </div>
+    {% if cover_image %}
+    <div class="post-cover-container">
+      <img src="{{ cover_image }}" alt="{{ title }}" class="post-cover">
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content | safe }}
+  </div>
+</article>

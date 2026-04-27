@@ -1,0 +1,164 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="hero hero-post">
+  {% set latestPost = collections.posts | reverse | first %}
+  <div class="hero-bg" style="background-image: url('{{ homepageData.hero_image }}');"></div>
+  <div class="hero-content">
+    <div class="hero-meta-top">{{ latestPost.data.tags[0] }} &middot; {{ latestPost.date | dateFilter }}</div>
+    <h1 class="display-text"><a href="{{ latestPost.url }}" style="color: inherit; text-decoration: none;">{{ latestPost.data.title }}</a></h1>
+    <p class="hero-summary">{{ latestPost.data.summary }}</p>
+  </div>
+</section>
+
+<!-- 區塊 1：能源科技 -->
+<section class="editor-picks">
+  <header class="section-header">
+    <h2>ENERGY <span class="subtitle">能源科技</span></h2>
+  </header>
+  <div class="carousel-container">
+    <button class="carousel-btn prev" aria-label="Previous">&larr;</button>
+    <div class="carousel-track-container">
+      <ul class="carousel-track">
+        {% set itemList = collections['能源科技'] %}
+        {% if itemList %}
+        {% for post in itemList | reverse %}
+        {% if loop.index0 < (homepageData.carousel_energy_count | default(9)) %}
+        <li class="carousel-slide">
+          <article class="article-card">
+            <div class="card-image" style="background-image: url('{{ post.data.cover_image or '/assets/placeholder.jpg' }}');"></div>
+            <div class="card-content">
+              <div class="card-meta"><span class="card-category">{{ post.data.tags[0] }}</span><span class="card-date">{{ post.date | dateFilter }}</span></div>
+              <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+              <p class="card-summary">{{ post.data.summary }}</p>
+            </div>
+          </article>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <button class="carousel-btn next" aria-label="Next">&rarr;</button>
+  </div>
+</section>
+
+<!-- 區塊 2：環境科學 -->
+<section class="editor-picks" style="background-color: var(--color-bg);">
+  <header class="section-header">
+    <h2>ENVIRONMENT <span class="subtitle">環境科學</span></h2>
+  </header>
+  <div class="carousel-container">
+    <button class="carousel-btn prev" aria-label="Previous">&larr;</button>
+    <div class="carousel-track-container">
+      <ul class="carousel-track">
+        {% set itemList = collections['環境科學'] %}
+        {% if itemList %}
+        {% for post in itemList | reverse %}
+        {% if loop.index0 < (homepageData.carousel_science_count | default(9)) %}
+        <li class="carousel-slide">
+          <article class="article-card">
+            <div class="card-image" style="background-image: url('{{ post.data.cover_image or '/assets/placeholder.jpg' }}');"></div>
+            <div class="card-content">
+              <div class="card-meta"><span class="card-category">{{ post.data.tags[0] }}</span><span class="card-date">{{ post.date | dateFilter }}</span></div>
+              <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+              <p class="card-summary">{{ post.data.summary }}</p>
+            </div>
+          </article>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <button class="carousel-btn next" aria-label="Next">&rarr;</button>
+  </div>
+</section>
+
+<!-- 區塊 3：SDGS -->
+<section class="editor-picks">
+  <header class="section-header">
+    <h2>SDGS <span class="subtitle">永續發展</span></h2>
+  </header>
+  <div class="carousel-container">
+    <button class="carousel-btn prev" aria-label="Previous">&larr;</button>
+    <div class="carousel-track-container">
+      <ul class="carousel-track">
+        {% set itemList = collections['SDGS'] %}
+        {% if itemList %}
+        {% for post in itemList | reverse %}
+        {% if loop.index0 < (homepageData.carousel_sdgs_count | default(9)) %}
+        <li class="carousel-slide">
+          <article class="article-card">
+            <div class="card-image" style="background-image: url('{{ post.data.cover_image or '/assets/placeholder.jpg' }}');"></div>
+            <div class="card-content">
+              <div class="card-meta"><span class="card-category">{{ post.data.tags[0] }}</span><span class="card-date">{{ post.date | dateFilter }}</span></div>
+              <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+              <p class="card-summary">{{ post.data.summary }}</p>
+            </div>
+          </article>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <button class="carousel-btn next" aria-label="Next">&rarr;</button>
+  </div>
+</section>
+
+<!-- 區塊 4：企業專訪 -->
+<section class="editor-picks" style="background-color: var(--color-bg);">
+  <header class="section-header">
+    <h2>INTERVIEW <span class="subtitle">企業專訪</span></h2>
+  </header>
+  <div class="carousel-container">
+    <button class="carousel-btn prev" aria-label="Previous">&larr;</button>
+    <div class="carousel-track-container">
+      <ul class="carousel-track">
+        {% set itemList = collections['企業專訪'] %}
+        {% if itemList %}
+        {% for post in itemList | reverse %}
+        {% if loop.index0 < (homepageData.carousel_interview_count | default(9)) %}
+        <li class="carousel-slide">
+          <article class="article-card">
+            <div class="card-image" style="background-image: url('{{ post.data.cover_image or '/assets/placeholder.jpg' }}');"></div>
+            <div class="card-content">
+              <div class="card-meta"><span class="card-category">{{ post.data.tags[0] }}</span><span class="card-date">{{ post.date | dateFilter }}</span></div>
+              <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+              <p class="card-summary">{{ post.data.summary }}</p>
+            </div>
+          </article>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <button class="carousel-btn next" aria-label="Next">&rarr;</button>
+  </div>
+</section>
+
+<!-- 區塊 5：影音精選 -->
+{% if homepageData.video_section_visible !== "FALSE" and homepageData.video_section_visible !== false %}
+<section class="video-section">
+  <header class="section-header">
+    <h2>FEATURED VIDEO <span class="subtitle">影音精選</span></h2>
+  </header>
+  <div class="video-container">
+    <div class="video-wrapper">
+      {% if homepageData.video_embed_url %}
+      <iframe
+        src="{{ homepageData.video_embed_url }}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}

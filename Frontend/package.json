@@ -1,0 +1,25 @@
+{
+  "name": "ares-webblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fetch-posts": "node ../ares-webblog/backend/fetch-google-data.js",
+    "prebuild": "npm run fetch-posts",
+    "predev": "npm run fetch-posts",
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  },
+  "dependencies": {
+    "@11ty/eleventy-fetch": "^5.1.2",
+    "dotenv": "^17.4.2"
+  }
+}

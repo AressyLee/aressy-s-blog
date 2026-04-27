@@ -1,0 +1,15 @@
+<article class="article-card">
+  {% if post.data.cover_image %}
+  <div class="card-image" style="background-image: url('{{ post.data.cover_image }}');"></div>
+  {% else %}
+  <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1000&auto=format&fit=crop');"></div>
+  {% endif %}
+  <div class="card-content">
+    <div class="card-meta">
+      <span class="card-category">{{ post.data.tags[0] if post.data.tags else '文章' }}</span>
+      <span class="card-date">{{ post.data.date | safe }}</span>
+    </div>
+    <h3 class="card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+    <p class="card-summary">{{ post.data.summary | truncate(80) }}</p>
+  </div>
+</article>

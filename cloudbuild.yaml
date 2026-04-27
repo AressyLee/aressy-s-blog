@@ -1,0 +1,37 @@
+steps:
+  # 1. 安裝後端資料抓取腳本的依賴套件
+  - name: 'node:20'
+    entrypoint: npm
+    args: ['install']
+    dir: 'ares-webblog'
+
+  # 2. 安裝前端 (Eleventy) 的依賴套件
+  - name: 'node:20'
+    entrypoint: npm
+    args: ['install']
+    dir: 'Frontend'
+
+  # 3. 執行構建：會自動觸發 fetch-google-data.js 抓取資料，接著進行 11ty 編譯
+  - name: 'node:20'
+    entrypoint: npm
+    args: ['run', 'build']
+    dir: 'Frontend'
+
+  # 4. 部署至 Firebase Hosting
+  - name: 'node:20'
+    entrypoint: npx
+    args: ['firebase-tools', 'deploy', '--project', 'aressy-blog', '--token', '$_FIREBASE_TOKEN', '--non-interactive']
+    dir: 'Frontend'
+
+# =========================================================
+# 替代變數 (Substitutions)
+# $_FIREBASE_TOKEN 不應寫死在此檔案中，
+# 請在 GCP Cloud Build 的「觸發條件 (Triggers)」設定頁面中，
+# 於「進階」設定的「替代變數」區塊新增 `_FIREBASE_TOKEN`，
+# 並填入您使用 `firebase login:ci` 取得的金鑰。
+# =========================================================
+substitutions:
+  _FIREBASE_TOKEN: 'REPLACE_ME_IN_GCP_CONSOLE'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
