@@ -1,0 +1,50 @@
+name: Deploy to Firebase Hosting
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-build]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Backend Dependencies
+        working-directory: ./ares-webblog
+        run: npm install
+
+      - name: Install Frontend Dependencies
+        working-directory: ./Frontend
+        run: npm install
+
+      - name: Build Project (Fetches Data & Runs 11ty)
+        working-directory: ./Frontend
+        run: npm run build
+        env:
+          POSTS_SHEET_URL: ${{ secrets.POSTS_SHEET_URL }}
+          NEWS_SHEET_URL: ${{ secrets.NEWS_SHEET_URL }}
+          ABOUT_SHEET_URL: ${{ secrets.ABOUT_SHEET_URL }}
+          HOMEPAGE_SHEET_URL: ${{ secrets.HOMEPAGE_SHEET_URL }}
+          SITECONFIG_SHEET_URL: ${{ secrets.SITECONFIG_SHEET_URL }}
+
+      - name: Create Firebase Service Account Key File
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ${{ github.workspace }}/firebase-key.json
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Hosting
+        working-directory: ./Frontend
+        run: firebase deploy --only hosting --project aressy-blog --non-interactive
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-key.json

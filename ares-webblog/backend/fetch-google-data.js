@@ -6,7 +6,12 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-require('dotenv').config({ path: path.resolve(__dirname, '../../Frontend/.env') });
+const dotenvPath = path.resolve(__dirname, '../../Frontend/.env');
+if (fs.existsSync(dotenvPath)) {
+  require('dotenv').config({ path: dotenvPath });
+} else {
+  console.log("No .env file found, relying on process.env (CI environment expected).");
+}
 
 const APPS_SCRIPT_URL = process.env.POSTS_SHEET_URL || "";
 const POSTS_DIR = path.resolve(__dirname, '../../Frontend/src/posts');
