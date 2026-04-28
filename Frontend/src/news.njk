@@ -37,7 +37,9 @@ permalink: /archive/latest/
   <ul class="news-feed" id="news-feed">
     {% for item in newsData.items %}
     <li class="news-item" data-category="{{ item.category }}">
-      <a href="{{ item.link or '#' }}" class="news-item-link">
+      {# 暫時註解最新消息卡片連結功能 #}
+      {# <a href="{{ item.link or '#' }}" class="news-item-link"> #}
+      <a href="javascript:void(0);" class="news-item-link" style="cursor: default;" onclick="return false;">
         <div class="news-item-thumb" style="background-image: url('{{ item.image_url }}')"></div>
         <div class="news-item-body">
           <div class="news-item-meta">

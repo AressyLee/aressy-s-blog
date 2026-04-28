@@ -1,9 +1,10 @@
 [
+  { "label": "回首頁", "url": "/" },
   { "label": "關於我", "url": "/about/" },
   { "label": "最新消息", "url": "/archive/latest/" },
   { "label": "能源科技", "url": "/archive/energy/" },
   { "label": "環境科學", "url": "/archive/science/" },
   { "label": "SDGS", "url": "/archive/sdgs/" },
   { "label": "企業專訪", "url": "/archive/interview/" },
-  { "label": "課程預約", "url": "/booking/" }
+  { "label": "課程預約", "url": "/booking/", "disabled": true }
 ]
